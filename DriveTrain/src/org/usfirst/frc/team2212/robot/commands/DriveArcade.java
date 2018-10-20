@@ -15,10 +15,12 @@ public class DriveArcade extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.err.println("Drive arcade init");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		System.err.println(Robot.speedLX.get() + ", " + Robot.speedLY.get() + ", " + Robot.speedR.get());
 		if (Robot.speedLX.get() >= 0 && Robot.speedR.get() >= 0) {
 			Robot.drivetrain.drive(Robot.speedR.get() * (1 - Robot.speedLX.get()), Robot.speedR.get());
 		}
