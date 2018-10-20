@@ -11,12 +11,15 @@ import java.util.function.Supplier;
 
 import org.usfirst.frc.team2212.robot.subsystems.Drivetrain;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +33,13 @@ public class Robot extends TimedRobot {
 	public static Gearbox gearL, gearR;
 	public static Drivetrain drivetrain;
 	public static Supplier<Double> speedR, speedLY, speedLX;
+	public static Trajectory trj;
 
+	public static final Encoder LEFT_ENCODER = new Encoder(RobotMap.DIO.LEFT_ENCODER_1,
+			RobotMap.DIO.LEFT_ENCODER_2);
+	public static final Encoder RIGHT_ENCODER = new Encoder(RobotMap.DIO.RIGHT_ENCODER_1,
+			RobotMap.DIO.RIGHT_ENCODER_2);
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -39,13 +48,21 @@ public class Robot extends TimedRobot {
 	 * for any initialization code.
 	 */
 	@Override
-	public void robotInit() 
-	{
+	public void robotInit() {
 		speedR = () -> (Robot.m_oi.joystickR.getY());
 		speedLY = () -> (Robot.m_oi.joystickL.getY());
 		speedLX = () -> (Robot.m_oi.joystickL.getX());
-		gearL = new Gearbox(new VictorSP(RobotMap.CAN.LEFT_UP), new VictorSP(RobotMap.CAN.LEFT_DOWN));
-		gearR = new Gearbox(new VictorSP(RobotMap.CAN.RIGHT_UP), new VictorSP(RobotMap.CAN.RIGHT_DOWN));
+		gearL = new Gearbox(new WPI_TalonSRX(RobotMap.CAN.LEFT_UP), new WPI_TalonSRX(RobotMap.CAN.LEFT_DOWN));
+		gearR = new Gearbox(new WPI_TalonSRX(RobotMap.CAN.RIGHT_UP), new WPI_TalonSRX(RobotMap.CAN.RIGHT_DOWN));
+		
+		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
+        Waypoint[] points = new Waypoint[] {
+                new Waypoint(0, 0, 0),
+                new Waypoint(1, 0, 0),
+                new Waypoint(2, 0, 0)
+        };
+
+        trj = Pathfinder.generate(points, config);
 		
 		drivetrain = new Drivetrain(gearL, gearR);
 		m_oi = new OI();

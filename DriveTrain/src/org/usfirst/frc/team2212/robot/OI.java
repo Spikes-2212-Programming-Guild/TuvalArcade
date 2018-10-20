@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team2212.robot;
 
+import org.usfirst.frc.team2212.robot.commands.DriveWithPathFinder;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,4 +19,10 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI /* GEVALD */ {
 	public Joystick joystickL = new Joystick(0);
 	public Joystick joystickR = new Joystick(1);
+	
+	public JoystickButton btn = new JoystickButton(joystickR, 1);
+	
+	public OI() {
+		btn.whenPressed(new DriveWithPathFinder(Robot.trj));
+	}
 }

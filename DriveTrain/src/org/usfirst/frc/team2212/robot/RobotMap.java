@@ -20,4 +20,11 @@ public class RobotMap {
 		public static final int RIGHT_UP = 1;
 		public static final int RIGHT_DOWN = 0;
 	}
+	
+	public interface DIO {
+		public static final int LEFT_ENCODER_1 = 1;
+		public static final int LEFT_ENCODER_2 = 2;
+		public static final int RIGHT_ENCODER_1 = 3;
+		public static final int RIGHT_ENCODER_2 = 4;
+	}
 }
