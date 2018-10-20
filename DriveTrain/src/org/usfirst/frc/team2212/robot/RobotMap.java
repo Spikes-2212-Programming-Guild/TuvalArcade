@@ -15,9 +15,9 @@ package org.usfirst.frc.team2212.robot;
  */
 public class RobotMap {
 	public interface PWM {
-		public static final int LEFT_UP = 0;
-		public static final int LEFT_DOWN = 1;
-		public static final int RIGHT_UP = 2;
-		public static final int RIGHT_DOWN = 3;
+		public static final int LEFT_UP = 5;
+		public static final int LEFT_DOWN = 4;
+		public static final int RIGHT_UP = 1;
+		public static final int RIGHT_DOWN = 0;
 	}
 }
