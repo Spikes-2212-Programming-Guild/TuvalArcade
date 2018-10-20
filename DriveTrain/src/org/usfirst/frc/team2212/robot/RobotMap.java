@@ -14,7 +14,7 @@ package org.usfirst.frc.team2212.robot;
  * floating around.
  */
 public class RobotMap {
-	public interface PWM {
+	public interface CAN {
 		public static final int LEFT_UP = 5;
 		public static final int LEFT_DOWN = 4;
 		public static final int RIGHT_UP = 1;

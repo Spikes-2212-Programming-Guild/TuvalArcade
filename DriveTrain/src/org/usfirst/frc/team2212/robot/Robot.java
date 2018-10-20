@@ -44,8 +44,8 @@ public class Robot extends TimedRobot {
 		speedR = () -> (Robot.m_oi.joystickR.getY());
 		speedLY = () -> (Robot.m_oi.joystickL.getY());
 		speedLX = () -> (Robot.m_oi.joystickL.getX());
-		gearL = new Gearbox(new VictorSP(RobotMap.PWM.LEFT_UP), new VictorSP(RobotMap.PWM.LEFT_DOWN));
-		gearR = new Gearbox(new VictorSP(RobotMap.PWM.RIGHT_UP), new VictorSP(RobotMap.PWM.RIGHT_DOWN));
+		gearL = new Gearbox(new VictorSP(RobotMap.CAN.LEFT_UP), new VictorSP(RobotMap.CAN.LEFT_DOWN));
+		gearR = new Gearbox(new VictorSP(RobotMap.CAN.RIGHT_UP), new VictorSP(RobotMap.CAN.RIGHT_DOWN));
 		
 		drivetrain = new Drivetrain(gearL, gearR);
 		m_oi = new OI();

@@ -21,16 +21,16 @@ public class DriveArcade extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		System.err.println(Robot.speedLX.get() + ", " + Robot.speedLY.get() + ", " + Robot.speedR.get());
-		if (Robot.speedLX.get() >= 0 && Robot.speedR.get() >= 0) {
-			Robot.drivetrain.drive(Robot.speedR.get() * (1 - Robot.speedLX.get()), Robot.speedR.get());
+		if(Robot.speedLX.get() == 0) {
+			Robot.drivetrain.drive(Robot.speedR.get(), Robot.speedR.get());
 		}
-		else if (Robot.speedLX.get() <= 0 && Robot.speedR.get() >= 0) {
-			Robot.drivetrain.drive(Robot.speedR.get(), Robot.speedR.get() * (1 + Robot.speedLX.get()));
+		else if(Robot.speedR.get() == 0) {
+			Robot.drivetrain.drive(Robot.speedLX.get(), -Robot.speedLX.get());
 		}
-		else if (Robot.speedLX.get() >= 0 && Robot.speedR.get() <= 0) {
+		else if(Robot.speedLX.get() > 0) {
 			Robot.drivetrain.drive(Robot.speedR.get(), Robot.speedR.get() * (1 - Robot.speedLX.get()));
 		}
-		else if (Robot.speedLX.get() <= 0 && Robot.speedR.get() <= 0) {
+		else if(Robot.speedLX.get() < 0) {
 			Robot.drivetrain.drive(Robot.speedR.get() * (1 + Robot.speedLX.get()), Robot.speedR.get());
 		}
 	}
